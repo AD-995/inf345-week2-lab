@@ -26,4 +26,4 @@ END {
     for (ext in count)
         print count[ext], ext
 }
-' | sort -k1,1nr -k2,2
+' | sort -k1,1nr -k2,2 | head -5
