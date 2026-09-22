@@ -4,13 +4,13 @@ set -euo pipefail
 dir="${1:?usage: report.sh <directory>}"
 
 echo "FILES: $(find "$dir" -type f | wc -l)"
-echo "DIRS: $(find "$dir" -type d | wc -l)"
+echo "DIRS: $(find "$dir" -mindepth 1 -type d | wc -l)"
 
 echo "LARGEST:"
-find "$dir" -type f -printf '%s %p\n' | sort -nr | head -3
+find "$dir" -type f -printf '%s %P\n' | sort -nr | head -3
 
 echo "EXECUTABLE:"
-find "$dir" -type f -executable -printf '%p\n' | sort
+find "$dir" -type f -perm -100 -printf '%P\n' | sort
 
 echo "EXTENSIONS:"
 find "$dir" -type f -printf '%f\n' |
